@@ -80,7 +80,15 @@ function App() {
 							darkMode={darkMode}
 							setDarkMode={setDarkMode}
 						/>
-						<p className="lead text-center">Buscador de Imágenes</p>
+						<p className="lead text-center">
+              <a 
+                href="https://github.com/ManuelBlaze/Pixabay_react" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                <i className="fab fa-github"></i>
+              </a>
+              Buscador de Imágenes</p>
 
 						<Formulario setBusqueda={setBusqueda} />
 					</div>
