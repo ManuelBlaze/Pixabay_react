@@ -1,3 +1,7 @@
+<h1>PixaBay Api React + DarkMode</h1>
+Proyecto de práctica React, buscador de imagenes consumiendo la API de https://pixabay.com/
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
