@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import Swal from 'sweetalert2';
 
-const Formulario = () => {
+const Formulario = ({setBusqueda}) => {
 
     //Usestate termino
     const [termino, setTermino] = useState('');
@@ -16,10 +16,12 @@ const Formulario = () => {
 			    icon: "error",
     			title: "Error",
 				text: "Escribe lo que deseas buscar!"
-			});
+            });
+            return;
         }
 
         //Enviar a app
+        setBusqueda(termino);
     }
 
     return (
@@ -48,7 +50,7 @@ const Formulario = () => {
 }
 
 Formulario.propTypes = {
-
+    setBusqueda: PropTypes.func.isRequired
 }
 
 export default Formulario
