@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Formulario from './components/Formulario';
 import ListadoImagenes from './components/ListadoImagenes';
+import DarkSwitch from './components/DarkSwitch';
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
   return (
     <div className="container">
       <div className="jumbotron">
+        <DarkSwitch />
         <p className="lead text-center">Buscador de Imágenes</p>
 
         <Formulario 
