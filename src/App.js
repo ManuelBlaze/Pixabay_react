@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Formulario from './components/Formulario';
 import ListadoImagenes from './components/ListadoImagenes';
 import DarkSwitch from './components/DarkSwitch';
+import Spinner from './components/Spinner';
 
 function App() {
 
@@ -10,6 +11,9 @@ function App() {
   const [imagenes, setImagenes] = useState([]);
   const [paginaActual, setPaginaActual] = useState(1);
   const [totalPaginas, setTotalPaginas] = useState(1);
+
+  const [carga, setCarga] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
 
@@ -54,46 +58,52 @@ function App() {
       
     setPaginaActual(nPaginaActual);
   }
+
+  //Mostrar Spinner solo 3 segundos
+  useEffect(() => {
+		setTimeout(() => {
+      setCarga(false);
+		}, 3000);
+  }, [carga, setCarga]);
   
-
   return (
-    <div className="container">
-      <div className="jumbotron">
-        <DarkSwitch />
-        <p className="lead text-center">Buscador de Imágenes</p>
+		<div>
+			{/* Carga condicional del spinner o contenido */}
+			{carga ? (
+				<Spinner />
+			) : (
+				<div className="container">
+					<div className="jumbotron">
+						{/* DarkSwitch component */}
+						<DarkSwitch
+							setCarga={setCarga}
+							darkMode={darkMode}
+							setDarkMode={setDarkMode}
+						/>
+						<p className="lead text-center">Buscador de Imágenes</p>
 
-        <Formulario 
-          setBusqueda={setBusqueda}
-        />
-      </div>
+						<Formulario setBusqueda={setBusqueda} />
+					</div>
 
-      <div className="row justify-content-center">
-        <ListadoImagenes 
-          imagenes={imagenes}
-        />
+					<div className="row justify-content-center">
+						<ListadoImagenes imagenes={imagenes} />
 
-        {(paginaActual === 1) ? null 
-        : 
-          (<button 
-            className="btn btn-info mr-1"
-            onClick={paginaAnterior}
-            >
-            &laquo; Anterior
-          </button>)
-        }
+						{paginaActual === 1 ? null : (
+							<button className="btn btn-info mr-1" onClick={paginaAnterior}>
+								&laquo; Anterior
+							</button>
+						)}
 
-        {(paginaActual === totalPaginas) ? null 
-        :
-          (<button 
-            className="btn btn-info"
-            onClick={paginaSiguiente}
-          >
-            Siguiente &raquo;
-          </button>)
-        }
-      </div>
-    </div>
-  );
+						{paginaActual === totalPaginas ? null : (
+							<button className="btn btn-info" onClick={paginaSiguiente}>
+								Siguiente &raquo;
+							</button>
+						)}
+					</div>
+				</div>
+			)}
+		</div>
+	);
 }
 
 export default App;
